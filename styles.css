@@ -24,12 +24,21 @@ html{
     background-color: var(--Light-grayish-blue);
 }
 
+body{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
 main{
     display: grid;
-    grid-template-columns: repeat(4, 22rem);
-    grid-template-rows: repeat(4, 10rem);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 2.5rem;
-    margin: 10rem 20rem 1rem 28rem;
+    max-width: 1200px;
+    margin-bottom: 1rem;
 }
 
 .card{
@@ -37,7 +46,6 @@ main{
     padding: 2.5rem;
     border-radius: 0.7rem;
     box-shadow: 40px 60px 50px -47px #48556A24;
-
 }
 
 header{
@@ -86,7 +94,6 @@ header{
 
 .jeanette .name, .jeanette .subtag, .jeanette .quote, .jeanette .testimonial{
     color: var(--Very-dark-grayish-blue);
-    padding-right: 1rem;
 }
 
 .daniel{
@@ -127,4 +134,39 @@ header{
     border: .2rem solid #a775f1 ;
 }
 
+@media (max-width: 1000px) {
+    body{
+        display:block;
+        margin: 0 auto;
+        max-width: 350px;
+        margin-top: 2rem;
+    }
 
+    main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .daniel{
+        order: 1;
+    }
+            
+    .jonathan{
+        order: 2;
+    }
+    
+    .kira {
+        order: 5;
+    }
+    
+    .jeanette{
+        order: 3;
+    }
+    
+    .patrick{
+        order: 4;
+    }
+    
+}
