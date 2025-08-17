@@ -1,178 +1,199 @@
 :root {
-  /* Primary Colors */
-  --Moderate-violet: hsl(263, 55%, 52%);
-  --Very-dark-grayish-blue: hsl(217, 19%, 35%);
-  --Very-dark-blackish-blue: hsl(219, 29%, 14%);
-  --White: hsl(0, 0%, 100%);
-  /* Neutral Colors */
-  --Light-gray: hsl(0, 0%, 81%);
-  --Light-grayish-blue: hsl(210, 46%, 95%);
-  /* Font Size */
-  font-size: 13px;
-  --normal-font: 500;
-  --bold-font: 600;
+  --clr-primary-moderate-violet: hsl(263, 55%, 52%);
+  --clr-primary-very-dark-grayish-blue: hsl(217, 19%, 35%);
+  --clr-primary-very-dark-blackish-blue: hsl(219, 29%, 14%);
+
+  --clr-neutral-100-white: hsl(0, 0%, 100%);
+  --clr-neutral-200-Light-grayish-blue: hsl(210, 46%, 95%);
+  --clr-neutral-300-Light-gray: hsl(0, 0%, 81%);
+
+  --clr-neutral-white-50: hsl(0, 0%, 100%, 0.5);
+  --clr-neutral-white-70: hsl(0, 0%, 100%, 0.7);
+
+  --ff-base: "Barlow Semi Condensed", sans-serif;
+
+  --fs-11: calc(11 / 16 * 1rem);
+  --fs-13: calc(13 / 16 * 1rem);
+  --fs-20: calc(20 / 16 * 1rem);
+
+  --fw-normal: 500;
+  --fw-bold: 600;
 }
 
-* {
+/* reset */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4 {
+  line-height: 1;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+figure {
   margin: 0;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
   padding: 0;
 }
 
-html {
-  font-family: "Barlow Semi Condensed", sans serif;
-  background-color: var(--Light-grayish-blue);
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }
 
+img {
+  max-inline-size: 100%;
+  display: block;
+}
+
+/* general */
 body {
+  font-family: var(--ff-base);
+  font-size: var(--fs-13);
+  font-weight: var(--fw-normal);
+  padding-block: 2rem;
+  background: var(--clr-neutral-200-Light-grayish-blue);
+  line-height: 1.5;
+}
+
+/* utilities */
+.flow-content > * + * {
+  margin-block-start: var(--flow-spacer, 1rem);
+}
+
+.flex {
   display: flex;
-  flex-direction: column;
+  gap: var(--gap, 1.125rem);
+}
+
+.align-center {
   align-items: center;
-  justify-content: center;
-  height: 100vh;
 }
 
-main {
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0); /* Legacy property for Internet Explorer */
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* layout */
+.grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 2.5rem;
-  max-width: 1200px;
-  margin-bottom: 1rem;
+  gap: 1.5rem;
+  width: min(1110px, 90%);
+  margin-inline: auto;
 }
 
+@media (width > 1000px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .bg-purple {
+    grid-column: 1 / 3;
+    --bg-padding: 5.5rem;
+  }
+
+  .bg-dark {
+    grid-column: 2 / 4;
+  }
+
+  .grid-container > :nth-child(4) {
+    grid-row: 2 / 3;
+  }
+
+  .grid-container > :last-child {
+    grid-column: 4 / 5;
+    grid-row: 1 / 3;
+  }
+}
+
+/* card styles */
 .card {
-  background-color: var(--White);
-  padding: 2.5rem;
-  border-radius: 0.7rem;
-  box-shadow: 40px 60px 50px -47px #48556a24;
+  background: var(--bg, var(--clr-neutral-100-white));
+  color: var(--color, var(--clr-primary-very-dark-grayish-blue));
+  padding: 2rem;
+  border-radius: 0.5rem;
 }
 
-header {
-  margin-bottom: 1.4rem;
-}
-
-.profilepic {
-  float: left;
+.card img {
   border-radius: 50%;
-  height: 2.5rem;
-  margin-right: 1.3rem;
+  border: 3px solid var(--border-color, transparent);
 }
 
-.name {
-  font-size: 1rem;
-  color: var(--White);
-  font-weight: var(--normal-font);
+.card .name {
+  font-size: var(--fs-13);
+  font-weight: var(--fw-bold);
 }
 
-.subtag {
-  font-size: 0.8rem;
-  color: var(--White);
-  font-weight: var(--normal-font);
-  opacity: 50%;
+.card .tag {
+  font-size: var(--fs-11);
+  color: hsl(from var(--color, var(--clr-primary-very-dark-grayish-blue)) h s l / 0.5);
 }
 
-.quote {
-  color: var(--White);
-  font-size: 1.7rem;
-  font-weight: 500;
-  margin-bottom: 1.8rem;
+.card .featured-quote {
+  font-size: var(--fs-20);
+  margin-block-start: 1.125rem;
+  line-height: 1.3;
 }
 
-.testimonial {
-  color: var(--White);
-  font-size: 1.1rem;
-  opacity: 70%;
-  font-weight: 400;
-  line-height: 1.4;
-  padding-right: 1rem;
+.card .testimonial {
+  color: hsl(from var(--color, var(--clr-primary-very-dark-grayish-blue)) h s l / 0.7);
 }
 
-.kira .name,
-.kira .subtag,
-.kira .quote,
-.kira .testimonial {
-  color: var(--Very-dark-grayish-blue);
-}
+.bg-purple {
+  --bg: var(--clr-primary-moderate-violet);
+  --color: var(--clr-neutral-100-white);
+  --border-color: var(--clr-neutral-white-50);
 
-.jeanette .name,
-.jeanette .subtag,
-.jeanette .quote,
-.jeanette .testimonial {
-  color: var(--Very-dark-grayish-blue);
-}
-
-.daniel {
-  grid-area: 1 / 1 / span 2 / span 2;
-  background-color: var(--Moderate-violet);
   background-image: url(./images/bg-pattern-quotation.svg);
   background-repeat: no-repeat;
-  background-position: 30rem 0;
+  background-position: calc(100% - var(--bg-padding, 2rem)) 0;
 }
 
-.daniel .quote,
-.jonathan .quote {
-  margin-bottom: 1.2rem;
+.bg-dark {
+  --bg: var(--clr-primary-very-dark-blackish-blue);
+  --color: var(--clr-neutral-100-white);
+  --border-color: var(--clr-primary-moderate-violet);
 }
 
-.daniel .profilepic {
-  border: 0.2rem solid #a775f1;
+.bg-grey {
+  --bg: var(--clr-primary-very-dark-grayish-blue);
+  --color: var(--clr-neutral-100-white);
 }
 
-.jonathan {
-  grid-area: 1 / 3 / span 2 / span 1;
-  background-color: var(--Very-dark-grayish-blue);
+/* FEM Styles */
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  margin-block-start: 1rem;
 }
-
-.kira {
-  grid-area: 1 / 4 / span 4 / span 1;
-}
-
-.jeanette {
-  grid-area: 3 / 1 / span 2 / span 1;
-}
-
-.patrick {
-  grid-area: 3 / 2 / span 2 / span 2;
-  background-color: var(--Very-dark-blackish-blue);
-}
-
-.patrick .profilepic {
-  border: 0.2rem solid #a775f1;
-}
-
-@media (max-width: 1000px) {
-  body {
-    display: block;
-    margin: 0 auto;
-    max-width: 350px;
-    margin-top: 2rem;
-  }
-
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .daniel {
-    order: 1;
-  }
-
-  .jonathan {
-    order: 2;
-  }
-
-  .kira {
-    order: 5;
-  }
-
-  .jeanette {
-    order: 3;
-  }
-
-  .patrick {
-    order: 4;
-  }
+.attribution a {
+  color: hsl(228, 45%, 44%);
 }
